@@ -4,62 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RAWG API Example</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    #gameList {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    li {
-      margin: 10px;
-      padding: 15px;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      transition: transform 0.3s ease-in-out;
-      overflow: hidden;
-    }
-
-    li:hover {
-      transform: scale(1.05);
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    img:hover {
-      transform: scale(1.1);
-    }
-
-    .details {
-      margin-top: 10px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -68,51 +13,6 @@
 <ul id="gameList"></ul>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  const apiKey = 'a89cc6541957497284c22834dfaa49e3'; // Sostituisci con la tua chiave API da RAWG
-  const theme = 'puzzle';
-  const limit = 10;
-
-  const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}&genres=${theme}&page_size=${limit}`;
-
-  // Funzione per creare un elemento di lista per ogni gioco
-  function createGameListItem(game) {
-    const listItem = document.createElement('li');
-    const image = document.createElement('img');
-
-    image.src = game.background_image;
-    image.alt = game.name;
-
-    const details = document.createElement('div');
-    details.className = 'details';
-    details.innerHTML = `<strong>${game.name}</strong><br>Punteggio: ${game.rating}<br>Data di rilascio: ${game.released}`;
-
-    listItem.appendChild(image);
-    listItem.appendChild(details);
-
-    return listItem;
-  }
-
-  // Funzione per aggiungere i giochi alla lista nell'HTML
-  function displayGames(games) {
-    const gameList = document.getElementById('gameList');
-    games.forEach(game => {
-      const listItem = createGameListItem(game);
-      gameList.appendChild(listItem);
-    });
-  }
-
-  // Effettua la richiesta GET all'API di RAWG
-  axios.get(apiUrl)
-          .then(response => {
-            // Gestisci la risposta qui
-            const games = response.data.results;
-            displayGames(games);
-          })
-          .catch(error => {
-            console.error('Errore nella richiesta API:', error);
-          });
-</script>
-
+<script src="api.js"></script>
 </body>
 </html>
